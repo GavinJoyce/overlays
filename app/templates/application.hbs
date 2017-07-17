@@ -1,5 +1,51 @@
-{{!-- The following component displays Ember's default welcome message. --}}
-{{welcome-page}}
-{{!-- Feel free to remove this! --}}
+<style>
+  .trigger {
+    background-color: lightgreen;
+    border: 1px solid red;
+    width: 400px;
+    padding: 10px;
+  }
 
-{{outlet}}
+  .content {
+    background-color: lightblue;
+    border: 1px solid red;
+    width: 400px;
+    padding: 10px;
+  }
+</style>
+
+{{#basic-dropdown as |overlay|}}
+  {{#overlay.trigger class="trigger"}}
+    Trigger 1
+  {{/overlay.trigger}}
+  {{#overlay.content class="content"}}
+    {{#basic-dropdown as |overlay|}}
+      {{#overlay.trigger class="trigger"}}
+        Trigger 2
+      {{/overlay.trigger}}
+      {{#overlay.content class="content"}}
+        Content of trigger 2
+      {{/overlay.content}}
+    {{/basic-dropdown}}
+  {{/overlay.content}}
+
+  <br />
+  <br />
+  <br />
+  <br />
+
+  {{#unless overlay.isOpen}}
+    <button onclick={{action 'showOverlay' overlay}}>Show Overlay</button>
+  {{/unless}}
+{{/basic-dropdown}}
+
+
+
+<br />
+<br />
+<br />
+<br />
+<button onclick={{action 'showOverlayGlobally' overlay}}>Show Overlay Globally</button>
+
+
+<hr />
